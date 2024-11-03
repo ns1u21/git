@@ -1,33 +1,34 @@
-def add(x, y):
-    return x + y
+import sys
 
-def subtract(x, y):
-    return x - y
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
 
 def main():
-    print("Simple Calculator")
-    print("Choose an operation:")
-    print("1. Add")
-    print("2. Subtract")
+    if len(sys.argv) != 4:
+        print("Usage: app.py <operation> <num1> <num2>")
+        print("Operation should be 'add' or 'subtract'")
+        sys.exit(1)
 
-    choice = input("Enter choice (1/2): ")
-
-    if choice not in ['1', '2']:
-        print("Invalid choice! Please select 1 or 2.")
-        return
-
+    operation = sys.argv[1]
     try:
-        num1 = float(input("Enter first number: "))
-        num2 = float(input("Enter second number: "))
-
-        if choice == '1':
-            result = add(num1, num2)
-            print(f"The result of addition is: {result}")
-        elif choice == '2':
-            result = subtract(num1, num2)
-            print(f"The result of subtraction is: {result}")
+        num1 = float(sys.argv[2])
+        num2 = float(sys.argv[3])
     except ValueError:
-        print("Invalid input! Please enter numeric values.")
+        print("Please provide valid numbers.")
+        sys.exit(1)
+
+    if operation == "add":
+        result = add(num1, num2)
+    elif operation == "subtract":
+        result = subtract(num1, num2)
+    else:
+        print("Invalid operation. Use 'add' or 'subtract'.")
+        sys.exit(1)
+
+    print("Result:", result)
 
 if __name__ == "__main__":
     main()
