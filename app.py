@@ -1,33 +1,37 @@
-import sys
-
 def add(x, y):
     return x + y
 
 def subtract(x, y):
     return x - y
 
-def multiple(x, y):
-    return x * y  # Corrected function name to 'multiply'
+def multiply(x, y):  # Changed from 'multiple' to 'multiply' for clarity
+    return x * y  
+
+def divide(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide by zero.")
+    return x / y
 
 def main():
     print("Simple Calculator")
     print("Choose an operation:")
     print("1. Add")
     print("2. Subtract")
-    print("3. Multiply")  # Updated text from "Multiple" to "Multiply"
+    print("3. Multiply")
+    print("4. Divide")  # Changed "Multiple" to "Divide"
 
-    choice = input("Enter choice (1/2/3): ")
+    choice = input("Enter choice (1/2/3/4): ")
 
-    if choice not in ['1', '2', '3']:
-        print("Invalid choice! Please select 1, 2, or 3.")
-        return  # Moved return statement outside to avoid skipping input section
+    if choice not in ['1', '2', '3', '4']:
+        print("Invalid choice! Please select 1, 2, 3, or 4.")
+        return
 
     try:
         num1 = float(input("Enter first number: "))
         num2 = float(input("Enter second number: "))
     except ValueError:
-        print("Please provide valid numbers.")
-        sys.exit(1)
+        print("Invalid input! Please enter numeric values.")
+        return  # Return early if input is invalid
 
     if choice == '1':
         result = add(num1, num2)
@@ -36,11 +40,11 @@ def main():
         result = subtract(num1, num2)
         print(f"The result of subtraction is: {result}")
     elif choice == '3':
-        result = multiple(num1, num2)
-        print(f"The result of multiplication is: {result}")  # Corrected output message
-
-    # The following print statement is not needed as the result is already printed in the conditionals
-    # print("Result:", result)
+        result = multiply(num1, num2)
+        print(f"The result of multiplication is: {result}")  # Corrected message
+    elif choice == '4':
+        result = divide(num1, num2)
+        print(f"The result of division is: {result}")  # Corrected message
 
 if __name__ == "__main__":
     main()
